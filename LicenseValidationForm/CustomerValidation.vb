@@ -200,7 +200,7 @@ Namespace LicenseVerification
 
         ' Log validation results
         Private Sub LogValidationResult(ByVal licenseKey As String, ByVal connectionType As String, ByVal success As Boolean, ByVal message As String)
-            Dim logDirectory As String = "C:\Users\aruch\OneDrive\Documents\Log"
+            Dim logDirectory As String = "C:\Users\aruch\OneDrive\Documents\Log\validation_log.txt"
             Dim logFilePath As String = Path.Combine(logDirectory, "validation_log.txt")
 
             Try
@@ -218,7 +218,7 @@ Namespace LicenseVerification
         ' Log errors
         Private Sub LogError(ByVal ex As Exception)
             Try
-                Dim logDirectory As String = "C:\Users\aruch\OneDrive\Documents\Log"
+                Dim logDirectory As String = "C:\Users\aruch\OneDrive\Documents\Log\error_log.txt"
                 Dim logFilePath As String = Path.Combine(logDirectory, "error_log.txt")
 
                 If Not Directory.Exists(logDirectory) Then

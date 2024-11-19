@@ -46,12 +46,13 @@ Namespace LicenseVerification
                         SaveCompanyDetailsToXml(companyDetails)
                         SaveConnectionStringsToXml(companyDetails)
                     Else
+                        ' Display a friendly message when company details are not found
                         MessageBox.Show("Company details could not be found.")
                     End If
                 End If
             Catch ex As Exception
-                ' Display any errors encountered during the process
-                MessageBox.Show($"Error: {ex.Message}")
+                ' Display only a general error message, suppressing exception details
+                MessageBox.Show("An error occurred while processing the request. Please try again.")
             End Try
         End Sub
 
@@ -73,7 +74,8 @@ Namespace LicenseVerification
                     Dim response = Await client.GetStringAsync(apiUrl)
                     Return JsonConvert.DeserializeObject(Of CompanyDetails)(response)
                 Catch httpEx As HttpRequestException
-                    MessageBox.Show($"Error fetching company details: {httpEx.Message}")
+                    ' Display a user-friendly message if the HTTP request fails
+                    MessageBox.Show("Error fetching company details from the server. Please check your connection.")
                     Return Nothing
                 End Try
             End Using
@@ -105,7 +107,8 @@ Namespace LicenseVerification
                 }
                 Return companyDetails
             Catch ex As Exception
-                MessageBox.Show($"Error reading local XML: {ex.Message}")
+                ' Display a friendly message if an error occurs while reading the XML
+                MessageBox.Show("An error occurred while reading the local company details.")
                 Return Nothing
             End Try
         End Function
@@ -138,7 +141,8 @@ Namespace LicenseVerification
                 doc.Save(LocalXmlPath)
                 MessageBox.Show("Company details saved locally.")
             Catch ex As Exception
-                MessageBox.Show($"Error saving company details to XML: {ex.Message}")
+                ' Display a friendly message if an error occurs while saving the XML
+                MessageBox.Show("An error occurred while saving company details.")
             End Try
         End Sub
 
@@ -164,7 +168,8 @@ Namespace LicenseVerification
                 doc.Save(connectionStringXmlPath)
                 MessageBox.Show("Connection strings saved successfully.")
             Catch ex As Exception
-                MessageBox.Show($"Error saving connection strings to XML: {ex.Message}")
+                ' Display a friendly message if an error occurs while saving connection strings
+                MessageBox.Show("An error occurred while saving connection strings.")
             End Try
         End Sub
 
